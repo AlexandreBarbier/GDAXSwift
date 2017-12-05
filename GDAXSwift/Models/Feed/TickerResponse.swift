@@ -12,4 +12,9 @@ class TickerResponse: Codable {
     var sequence:Int?
     var price:String?
     var product_id: String?
+    var trade_id: Int?
+    var side: String?
+    var last_size: String?
+    var best_bid: String?
+    var best_ask: String?
 }

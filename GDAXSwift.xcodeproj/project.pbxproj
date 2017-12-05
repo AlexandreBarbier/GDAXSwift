@@ -13,6 +13,8 @@
 		8D4401051FD5474D00232859 /* GDAXSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4401041FD5474D00232859 /* GDAXSwiftTests.swift */; };
 		8D4401071FD5474D00232859 /* GDAXSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D4400F91FD5474D00232859 /* GDAXSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D4401111FD5477C00232859 /* GDAX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4401101FD5477C00232859 /* GDAX.swift */; };
+		8D4CDF171FD701F7009A6C6B /* HeartbeatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CDF161FD701F7009A6C6B /* HeartbeatResponse.swift */; };
+		8D4CDF1A1FD70482009A6C6B /* Level2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CDF191FD70482009A6C6B /* Level2Response.swift */; };
 		8D6143ED1FD54BB80089A5AC /* TickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EB1FD54BB80089A5AC /* TickerResponse.swift */; };
 		8D6143EE1FD54BB80089A5AC /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EC1FD54BB80089A5AC /* Response.swift */; };
 		8D6143F01FD54BC80089A5AC /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EF1FD54BC80089A5AC /* Feed.swift */; };
@@ -40,6 +42,8 @@
 		8D4400FF1FD5474D00232859 /* GDAXSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GDAXSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4401041FD5474D00232859 /* GDAXSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXSwiftTests.swift; sourceTree = "<group>"; };
 		8D4401101FD5477C00232859 /* GDAX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAX.swift; sourceTree = "<group>"; };
+		8D4CDF161FD701F7009A6C6B /* HeartbeatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatResponse.swift; sourceTree = "<group>"; };
+		8D4CDF191FD70482009A6C6B /* Level2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level2Response.swift; sourceTree = "<group>"; };
 		8D6143EB1FD54BB80089A5AC /* TickerResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickerResponse.swift; sourceTree = "<group>"; };
 		8D6143EC1FD54BB80089A5AC /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		8D6143EF1FD54BC80089A5AC /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
@@ -125,8 +129,7 @@
 		8D4401121FD54A4200232859 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8D6143EC1FD54BB80089A5AC /* Response.swift */,
-				8D6143EB1FD54BB80089A5AC /* TickerResponse.swift */,
+				8D4CDF181FD70256009A6C6B /* Feed */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -137,6 +140,17 @@
 				8D6143EF1FD54BC80089A5AC /* Feed.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		8D4CDF181FD70256009A6C6B /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				8D6143EC1FD54BB80089A5AC /* Response.swift */,
+				8D6143EB1FD54BB80089A5AC /* TickerResponse.swift */,
+				8D4CDF161FD701F7009A6C6B /* HeartbeatResponse.swift */,
+				8D4CDF191FD70482009A6C6B /* Level2Response.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		ED81D645BC86101DF4A1C973 /* Frameworks */ = {
@@ -215,7 +229,7 @@
 				TargetAttributes = {
 					8D4400F51FD5474D00232859 = {
 						CreatedOnToolsVersion = 9.1;
-						LastSwiftMigration = 0910;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					8D4400FE1FD5474D00232859 = {
@@ -353,7 +367,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D4CDF171FD701F7009A6C6B /* HeartbeatResponse.swift in Sources */,
 				8D6143ED1FD54BB80089A5AC /* TickerResponse.swift in Sources */,
+				8D4CDF1A1FD70482009A6C6B /* Level2Response.swift in Sources */,
 				8D6143F01FD54BC80089A5AC /* Feed.swift in Sources */,
 				8D6143EE1FD54BB80089A5AC /* Response.swift in Sources */,
 				8D4401111FD5477C00232859 /* GDAX.swift in Sources */,

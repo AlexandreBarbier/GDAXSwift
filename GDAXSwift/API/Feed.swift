@@ -40,24 +40,49 @@ struct GDAXProductsId {
 
 class Feed: NSObject {
     typealias TickerHandler = (_ message: TickerResponse) -> Void
-    private let ws = WebSocket(url: URL(string: "wss://ws-feed.gdax.com")!)
+    typealias HeartbeatHandler = (_ message: HeartbeatResponse) -> Void
+    typealias Level2Handler = (_ message: Level2Response) -> Void
+    
     private var requestedMessage: [String] = []
-    private var tickerHandler: [String: TickerHandler] = [:]
+    private var tickerHandlers: [String: TickerHandler] = [:]
+    private var heartbeatHandlers: [String: HeartbeatHandler] = [:]
+    private var level2Handlers: [String: Level2Handler] = [:]
+    
+    private let ws = WebSocket(url: URL(string: "wss://ws-feed.gdax.com")!)
+    
     static let client = Feed()
     
     private override init() {
         super.init()
         ws.onText = { message in
             let decoder = JSONDecoder()
+            let response = message.data(using: .utf8)!
             
-            let da = message.data(using: .utf8)!
             do {
-                let k  = try decoder.decode(Response.self, from: da)
-                if k.type == "ticker" {
-                    let da2 = message.data(using: .utf8)!
-                    let tick = try decoder.decode(TickerResponse.self, from: da2)
-                    if let handler = self.tickerHandler[tick.product_id!] {
-                        handler(tick)
+                let k  = try decoder.decode(Response.self, from: response)
+                if let chanType = k.type, let fType = FeedType(rawValue: chanType) {
+                    switch fType {
+                    case .ticker:
+                        let da2 = message.data(using: .utf8)!
+                        let tick = try decoder.decode(TickerResponse.self, from: da2)
+                        if let handler = self.tickerHandlers[tick.product_id!] {
+                            handler(tick)
+                        }
+                        break
+                    case .heartbeat:
+                        let da2 = message.data(using: .utf8)!
+                        let heartbeat = try decoder.decode(HeartbeatResponse.self, from: da2)
+                        if let handler = self.heartbeatHandlers[heartbeat.product_id!] {
+                            handler(heartbeat)
+                        }
+                        break
+                    case .l2update:
+                        let da2 = message.data(using: .utf8)!
+                        let l2update = try decoder.decode(Level2Response.self, from: da2)
+                        if let handler = self.level2Handlers[l2update.product_id!] {
+                            handler(l2update)
+                        }
+                        break
                     }
                 }
             } catch {
@@ -71,18 +96,49 @@ class Feed: NSObject {
         }
         ws.connect()
     }
-
+    
+    private func getSubscription(name: String, product: String) -> String {
+        return "{\"type\": \"subscribe\", \"channels\": [{ \"name\": \"\(name)\", \"product_ids\": [\"\(product)\"]}]}"
+    }
+    
     func subscribeTicker(for product: String, responseHandler: @escaping TickerHandler) {
-        tickerHandler[product] = responseHandler
+        tickerHandlers[product] = responseHandler
         if ws.isConnected {
-            ws.write(string:"{\"type\": \"subscribe\", \"channels\": [{ \"name\": \"ticker\", \"product_ids\": [\"\(product)\"]}]}")
-         
+            ws.write(string: getSubscription(name: "ticker", product: product))
         } else {
-            requestedMessage.append("{\"type\": \"subscribe\", \"channels\": [{ \"name\": \"ticker\", \"product_ids\": [\"\(product)\"]}]}")
+            requestedMessage.append(getSubscription(name: "ticker", product: product))
         }
     }
     
-    func disconect(product: String) {
-        tickerHandler.removeValue(forKey: product)
+    func subscribeHeartbeat(for product: String, responseHandler: @escaping HeartbeatHandler) {
+        heartbeatHandlers[product] = responseHandler
+        if ws.isConnected {
+            ws.write(string: getSubscription(name: "heartbeat", product: product))
+        } else {
+            requestedMessage.append(getSubscription(name: "heartbeat", product: product))
+        }
+    }
+    
+    func subscribeLevel2(for product: String, responseHandler: @escaping Level2Handler) {
+        level2Handlers[product] = responseHandler
+        if ws.isConnected {
+            ws.write(string:getSubscription(name: "level2", product: product))
+        } else {
+            requestedMessage.append(getSubscription(name: "level2", product: product))
+        }
+    }
+    
+    func disconect(product: String, channel: FeedType) {
+        switch channel {
+        case .heartbeat:
+            heartbeatHandlers.removeValue(forKey: product)
+            break
+        case .l2update:
+            level2Handlers.removeValue(forKey: product)
+            break
+        case .ticker:
+            tickerHandlers.removeValue(forKey: product)
+            break
+        }
     }
 }

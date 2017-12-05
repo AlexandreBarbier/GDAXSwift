@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum FeedType: String {
+    case heartbeat, ticker, l2update
+}
+
 class Response: Codable {
     var type: String?
 }

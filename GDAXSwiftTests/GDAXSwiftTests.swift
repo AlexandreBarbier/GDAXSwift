@@ -13,8 +13,6 @@ class GDAXSwiftTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-       
         
     }
     
@@ -23,12 +21,42 @@ class GDAXSwiftTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testTicker() {
         let expect = expectation(description:"")
         
         GDAX.feed.subscribeTicker(for: GDAXProductsId.LTC_BTC) { (message) in
-            GDAX.feed.disconect(product: GDAXProductsId.LTC_BTC)
+            GDAX.feed.disconect(product: GDAXProductsId.LTC_BTC, channel: .ticker)
             XCTAssert(message.product_id == "LTC-BTC")            
+            expect.fulfill()
+        }
+        waitForExpectations(timeout:5.0) { (error) in
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            }
+        }
+    }
+    
+    func testHeartbeat() {
+        let expect = expectation(description:"")
+        
+        GDAX.feed.subscribeHeartbeat(for: GDAXProductsId.LTC_BTC) { (message) in
+            GDAX.feed.disconect(product: GDAXProductsId.LTC_BTC, channel: .heartbeat)
+            XCTAssert(message.product_id == "LTC-BTC")
+            expect.fulfill()
+        }
+        waitForExpectations(timeout:5.0) { (error) in
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            }
+        }
+    }
+    
+    func testLevel2() {
+        let expect = expectation(description:"")
+        
+        GDAX.feed.subscribeLevel2(for: GDAXProductsId.LTC_BTC) { (message) in
+            GDAX.feed.disconect(product: GDAXProductsId.LTC_BTC, channel: .l2update)
+            XCTAssert(message.product_id == "LTC-BTC")
             expect.fulfill()
         }
         waitForExpectations(timeout:5.0) { (error) in

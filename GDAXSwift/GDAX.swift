@@ -9,6 +9,5 @@
 import UIKit
 
 class GDAX: NSObject {
-    static var feed = Feed.client
-    
+    static var feed = Feed.client    
 }
