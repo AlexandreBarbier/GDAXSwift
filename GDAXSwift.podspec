@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "GDAXSwift"
   s.version      = "0.0.1"
-  s.summary      = "A short description of GDAXSwift."
+  s.summary      = "GDAXSwift is light gdax sdk in swift"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,10 +25,10 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-		Cool lib for GDAX ticker subscription  
+		Cool lib for GDAX ticker subscription
                  DESC
 
-  s.homepage     = "http://EXAMPLE/GDAXSwift"
+  s.homepage     = "https://github.com/AlexandreBarbier/GDAXSwift"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -38,9 +38,7 @@ Pod::Spec.new do |s|
   #  CocoaPods will detect a license file if there is a named LICENSE*
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
-
-  #s.license      = "MIT (example)"
-   s.license      = { :type => "MIT", :file => "LICENSE" }
+   s.license      = { :type => "MIT", :file => "../LICENSE.md" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -63,15 +61,7 @@ Pod::Spec.new do |s|
   #  If this Pod runs only on iOS or OS X, then specify the platform and
   #  the deployment target. You can optionally include the target after the platform.
   #
-
-  # s.platform     = :ios
-  # s.platform     = :ios, "5.0"
- s.platform     = :ios, "9.0"
-  #  When using multiple platforms
-  # s.ios.deployment_target = "5.0"
-  # s.osx.deployment_target = "10.7"
-  # s.watchos.deployment_target = "2.0"
-  # s.tvos.deployment_target = "9.0"
+  s.platform     = :ios, "9.0"
 
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -92,10 +82,7 @@ Pod::Spec.new do |s|
   #
 
    s.source_files  = "GDAXSwift/**/*"
-  s.public_header_files = 'GDAXSwift/GDAXSwift.h'
-  s.exclude_files = "Classes/Exclude"
-
-  # s.public_header_files = "Classes/**/*.h"
+   # s.public_header_files = 'GDAXSwift/GDAXSwift.h'
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

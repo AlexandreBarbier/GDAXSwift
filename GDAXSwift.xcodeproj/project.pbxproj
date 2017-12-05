@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16583885F4457E3C56BC32D0 /* Pods_GDAXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E64050368745DC6E9B63776 /* Pods_GDAXSwift.framework */; };
+		4F856E3C4FBC4EE97DFD4ED6 /* Pods_GDAXSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46287BA462F34665F0581F90 /* Pods_GDAXSwiftTests.framework */; };
 		8D4401001FD5474D00232859 /* GDAXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4400F61FD5474D00232859 /* GDAXSwift.framework */; };
 		8D4401051FD5474D00232859 /* GDAXSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4401041FD5474D00232859 /* GDAXSwiftTests.swift */; };
 		8D4401071FD5474D00232859 /* GDAXSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D4400F91FD5474D00232859 /* GDAXSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -15,7 +16,8 @@
 		8D6143ED1FD54BB80089A5AC /* TickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EB1FD54BB80089A5AC /* TickerResponse.swift */; };
 		8D6143EE1FD54BB80089A5AC /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EC1FD54BB80089A5AC /* Response.swift */; };
 		8D6143F01FD54BC80089A5AC /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EF1FD54BC80089A5AC /* Feed.swift */; };
-		C13D44092670CCFDA93CC693 /* Pods_GDAXSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46287BA462F34665F0581F90 /* Pods_GDAXSwiftTests.framework */; };
+		8D7D64311FD69E7A00A8DD80 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D64301FD69E7A00A8DD80 /* Info.plist */; };
+		8D7D64321FD69E8100A8DD80 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D642E1FD69E5100A8DD80 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,14 +37,14 @@
 		46287BA462F34665F0581F90 /* Pods_GDAXSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GDAXSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4400F61FD5474D00232859 /* GDAXSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GDAXSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4400F91FD5474D00232859 /* GDAXSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDAXSwift.h; sourceTree = "<group>"; };
-		8D4400FA1FD5474D00232859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D4400FF1FD5474D00232859 /* GDAXSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GDAXSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4401041FD5474D00232859 /* GDAXSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXSwiftTests.swift; sourceTree = "<group>"; };
-		8D4401061FD5474D00232859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D4401101FD5477C00232859 /* GDAX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAX.swift; sourceTree = "<group>"; };
 		8D6143EB1FD54BB80089A5AC /* TickerResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickerResponse.swift; sourceTree = "<group>"; };
 		8D6143EC1FD54BB80089A5AC /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		8D6143EF1FD54BC80089A5AC /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		8D7D642E1FD69E5100A8DD80 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D7D64301FD69E7A00A8DD80 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E64050368745DC6E9B63776 /* Pods_GDAXSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GDAXSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6D09DA7230233386D70224B /* Pods-GDAXSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GDAXSwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GDAXSwiftTests/Pods-GDAXSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,7 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D4401001FD5474D00232859 /* GDAXSwift.framework in Frameworks */,
-				C13D44092670CCFDA93CC693 /* Pods_GDAXSwiftTests.framework in Frameworks */,
+				4F856E3C4FBC4EE97DFD4ED6 /* Pods_GDAXSwiftTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,8 +107,8 @@
 				8D4401131FD54A4D00232859 /* API */,
 				8D4401121FD54A4200232859 /* Models */,
 				8D4400F91FD5474D00232859 /* GDAXSwift.h */,
-				8D4400FA1FD5474D00232859 /* Info.plist */,
 				8D4401101FD5477C00232859 /* GDAX.swift */,
+				8D7D642E1FD69E5100A8DD80 /* Info.plist */,
 			);
 			path = GDAXSwift;
 			sourceTree = "<group>";
@@ -115,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				8D4401041FD5474D00232859 /* GDAXSwiftTests.swift */,
-				8D4401061FD5474D00232859 /* Info.plist */,
+				8D7D64301FD69E7A00A8DD80 /* Info.plist */,
 			);
 			path = GDAXSwiftTests;
 			sourceTree = "<group>";
@@ -245,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D7D64321FD69E8100A8DD80 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D7D64311FD69E7A00A8DD80 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
