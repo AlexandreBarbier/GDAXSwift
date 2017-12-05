@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "GDAXSwift"
-  s.version      = "0.0.2"
+  s.name         = "GDAX_Swift"
+  s.version      = "0.0.3"
   s.summary      = "GDAXSwift is light gdax sdk in swift"
 
   # This description is used to generate tags and improve search results.
