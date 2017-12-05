@@ -44,3 +44,5 @@ Carthage/Build
 
 
 *.xcworkspacedata
+
+\.DS_Store
