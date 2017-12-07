@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Level2Response: Codable {
+open class Level2Response: Codable {
     var product_id: String?
     var changes: [[String]]?
 }

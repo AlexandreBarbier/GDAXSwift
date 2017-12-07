@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TickerResponse: Codable {
+open class TickerResponse: Codable {
     var sequence:Int?
     var price:String?
     var product_id: String?

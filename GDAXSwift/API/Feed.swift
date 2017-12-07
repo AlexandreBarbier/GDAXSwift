@@ -9,7 +9,7 @@
 import UIKit
 import Starscream
 
-enum gdax_products: String {
+public enum gdax_products: String {
     case LTC, BTC, ETH, EUR, USD
 
     func getProductId(for product: gdax_products) -> String {
@@ -18,7 +18,7 @@ enum gdax_products: String {
 }
 
 
-struct GDAXProductsId {
+public struct GDAXProductsId {
     static let LTC_EUR = gdax_products.LTC.getProductId(for: gdax_products.EUR)
     static let LTC_USD = gdax_products.LTC.getProductId(for: gdax_products.USD)
     static let LTC_BTC = gdax_products.LTC.getProductId(for: gdax_products.BTC)
@@ -30,15 +30,16 @@ struct GDAXProductsId {
     static let ETH_USD = gdax_products.LTC.getProductId(for: gdax_products.USD)
     static let ETH_BTC = gdax_products.ETH.getProductId(for: gdax_products.BTC)
 }
-struct gdax_value {
+
+public struct gdax_value {
     var from: gdax_products
     var to: gdax_products
 }
 
-class Feed: NSObject {
-    typealias TickerHandler = (_ message: TickerResponse) -> Void
-    typealias HeartbeatHandler = (_ message: HeartbeatResponse) -> Void
-    typealias Level2Handler = (_ message: Level2Response) -> Void
+open class Feed: NSObject {
+    public typealias TickerHandler = (_ message: TickerResponse) -> Void
+    public typealias HeartbeatHandler = (_ message: HeartbeatResponse) -> Void
+    public typealias Level2Handler = (_ message: Level2Response) -> Void
     
     private var requestedMessage: [String] = []
     private var tickerHandlers: [String: TickerHandler] = [:]
@@ -47,7 +48,7 @@ class Feed: NSObject {
     
     private let ws = WebSocket(url: URL(string: "wss://ws-feed.gdax.com")!)
     
-    static let client = Feed()
+    public static let client = Feed()
     var errorHandler: ((_ error: Error?) -> Void)?
     
     private override init() {
@@ -104,28 +105,28 @@ class Feed: NSObject {
         return "{\"type\": \"subscribe\", \"channels\": [{ \"name\": \"\(name)\", \"product_ids\": [\"\(product)\"]}]}"
     }
     
-    func subscribeTicker(for product: gdax_value, responseHandler: @escaping TickerHandler) {
+    public func subscribeTicker(for product: gdax_value, responseHandler: @escaping TickerHandler) {
         let prod = product.from.getProductId(for: product.to)
         tickerHandlers[prod] = responseHandler
         let msg = getSubscription(name: "ticker", product: prod)
         ws.isConnected ? ws.write(string: msg) : requestedMessage.append(msg)
     }
     
-    func subscribeHeartbeat(for product: gdax_value, responseHandler: @escaping HeartbeatHandler) {
+    public func subscribeHeartbeat(for product: gdax_value, responseHandler: @escaping HeartbeatHandler) {
         let prod = product.from.getProductId(for: product.to)
         heartbeatHandlers[prod] = responseHandler
         let msg = getSubscription(name: "heartbeat", product: prod)
         ws.isConnected ? ws.write(string: msg) : requestedMessage.append(msg)
     }
     
-    func subscribeLevel2(for product: gdax_value, responseHandler: @escaping Level2Handler) {
+    public func subscribeLevel2(for product: gdax_value, responseHandler: @escaping Level2Handler) {
         let prod = product.from.getProductId(for: product.to)
         level2Handlers[prod] = responseHandler
         let msg = getSubscription(name: "level2", product: prod)
         ws.isConnected ? ws.write(string:msg) : requestedMessage.append(msg)
     }
     
-    func disconectFrom(channel: FeedType, product: String) {
+    public func disconectFrom(channel: FeedType, product: String) {
         switch channel {
         case .heartbeat:
             heartbeatHandlers.removeValue(forKey: product)

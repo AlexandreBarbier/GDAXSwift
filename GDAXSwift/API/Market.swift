@@ -9,7 +9,7 @@
 import UIKit
 var BASE_URL = "https://api.gdax.com"
 
-class Market: NSObject {
+open class Market: NSObject {
     static let client = Market()
     private let queue = OperationQueue()
     private let session:URLSession
@@ -20,17 +20,17 @@ class Market: NSObject {
         super.init()
     }
 
-    func product(productId: String) -> Product {
+    public func product(productId: String) -> Product {
         return Product(pID: productId)
     }
 
-    struct Product: Codable {
+    public struct Product: Codable {
         var product_id: String
         init(pID: String) {
             product_id = pID
         }
 
-        func getTrades(completion: @escaping ([TradeResponse]?, Error?) -> Void) {
+        public func getTrades(completion: @escaping ([TradeResponse]?, Error?) -> Void) {
             let request = URLRequest(url: URL(string:"\(BASE_URL)/products/\(product_id)/trades")!)
             Market.client.session.dataTask(with: request) { (data, response, error) in
                 guard error == nil else {
@@ -46,7 +46,7 @@ class Market: NSObject {
             }.resume()
         }
 
-        func getBook(level:Int = 1, completion: @escaping(BookResponse)-> Void) {
+        public func getBook(level:Int = 1, completion: @escaping(BookResponse)-> Void) {
             let request = URLRequest(url: URL(string:"\(BASE_URL)/products/\(product_id)/book\(level != 1 ? "?level=\(level)" : "")")!)
             Market.client.session.dataTask(with: request) { (data, response, error) in
                 let str = try! JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as? [String: Any]

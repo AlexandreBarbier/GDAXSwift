@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum FeedType: String {
+public enum FeedType: String {
     case heartbeat, ticker, l2update
 }
 

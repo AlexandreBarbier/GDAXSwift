@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GDAX: NSObject {
-    static var feed = Feed.client
-    static var market = Market.client
+open class GDAX: NSObject {
+    public static var feed = Feed.client
+    public static var market = Market.client
 }

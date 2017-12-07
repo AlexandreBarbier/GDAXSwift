@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TradeResponse: Codable {
+open class TradeResponse: Codable {
 //    var time: "2014-11-07T22:19:28.578544Z",
     var trade_id: Int?
     var price: String?
