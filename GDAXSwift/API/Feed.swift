@@ -34,6 +34,11 @@ public struct GDAXProductsId {
 public struct gdax_value {
     public var from: gdax_products
     public var to: gdax_products
+
+    public init(from:gdax_products, to: gdax_products) {
+        self.from = from
+        self.to = to
+    }
 }
 
 open class Feed: NSObject {
@@ -51,10 +56,11 @@ open class Feed: NSObject {
     public static let client = Feed()
     public var errorHandler: ((_ error: Error?) -> Void)?
     public var isConnected: Bool { return ws.isConnected }
-    
+
+    public var onConnectionChange:((_ connected: Bool) -> Void)?
+
     private override init() {
         super.init()
-
         ws.onText = { message in
             guard let response = message.data(using: .utf8) else {
                 return
@@ -93,11 +99,13 @@ open class Feed: NSObject {
             }
         }
         ws.onConnect = {
+            self.onConnectionChange?(self.isConnected)
             for msg in self.requestedMessage {
                 self.ws.write(string: msg)
             }
         }
         ws.onDisconnect = { error in
+            self.onConnectionChange?(self.isConnected)
             self.errorHandler?(error)
         }
         ws.connect()
