@@ -9,7 +9,7 @@
 import UIKit
 
 open class HeartbeatResponse: Codable {
-    var sequence: Int?
-    var last_trade_id: Int?
-    var product_id: String?
+    public var sequence: Int?
+    public var last_trade_id: Int?
+    public var product_id: String?
 }

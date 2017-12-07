@@ -12,28 +12,28 @@ import Starscream
 public enum gdax_products: String {
     case LTC, BTC, ETH, EUR, USD
 
-    func getProductId(for product: gdax_products) -> String {
+    public func getProductId(for product: gdax_products) -> String {
         return "\(self.rawValue)-\(product.rawValue)"
     }
 }
 
 
 public struct GDAXProductsId {
-    static let LTC_EUR = gdax_products.LTC.getProductId(for: gdax_products.EUR)
-    static let LTC_USD = gdax_products.LTC.getProductId(for: gdax_products.USD)
-    static let LTC_BTC = gdax_products.LTC.getProductId(for: gdax_products.BTC)
+    public static let LTC_EUR = gdax_products.LTC.getProductId(for: gdax_products.EUR)
+    public static let LTC_USD = gdax_products.LTC.getProductId(for: gdax_products.USD)
+    public static let LTC_BTC = gdax_products.LTC.getProductId(for: gdax_products.BTC)
     
-    static let BTC_EUR = gdax_products.BTC.getProductId(for: gdax_products.EUR)
-    static let BTC_USD = gdax_products.BTC.getProductId(for: gdax_products.USD)
+    public static let BTC_EUR = gdax_products.BTC.getProductId(for: gdax_products.EUR)
+    public static let BTC_USD = gdax_products.BTC.getProductId(for: gdax_products.USD)
     
-    static let ETH_EUR = gdax_products.ETH.getProductId(for: gdax_products.EUR)
-    static let ETH_USD = gdax_products.LTC.getProductId(for: gdax_products.USD)
-    static let ETH_BTC = gdax_products.ETH.getProductId(for: gdax_products.BTC)
+    public static let ETH_EUR = gdax_products.ETH.getProductId(for: gdax_products.EUR)
+    public static let ETH_USD = gdax_products.LTC.getProductId(for: gdax_products.USD)
+    public static let ETH_BTC = gdax_products.ETH.getProductId(for: gdax_products.BTC)
 }
 
 public struct gdax_value {
-    var from: gdax_products
-    var to: gdax_products
+    public var from: gdax_products
+    public var to: gdax_products
 }
 
 open class Feed: NSObject {
@@ -49,10 +49,12 @@ open class Feed: NSObject {
     private let ws = WebSocket(url: URL(string: "wss://ws-feed.gdax.com")!)
     
     public static let client = Feed()
-    var errorHandler: ((_ error: Error?) -> Void)?
+    public var errorHandler: ((_ error: Error?) -> Void)?
+    public var isConnected: Bool { return ws.isConnected }
     
     private override init() {
         super.init()
+
         ws.onText = { message in
             guard let response = message.data(using: .utf8) else {
                 return

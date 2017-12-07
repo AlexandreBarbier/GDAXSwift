@@ -9,9 +9,22 @@
 import UIKit
 
 open class TradeResponse: Codable {
-//    var time: "2014-11-07T22:19:28.578544Z",
-    var trade_id: Int?
-    var price: String?
-    var size: String?
-    var side: String?
+    public var time: String?
+    public var trade_id: Int?
+    public var price: String?
+    public var size: String?
+    public var side: String?
+    
+    public var formattedDate: String? {
+        if let time = time {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"//this your string date format
+            let date = dateFormatter.date(from: time)
+
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "HH:mm:ss"
+            return outputFormatter.string(from: date!)
+        }
+        return nil
+    }
 }
