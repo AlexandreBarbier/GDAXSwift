@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GDAX_Swift"
-  s.version      = "0.0.7"
+  s.version      = "0.0.8"
   s.summary      = "GDAXSwift is light gdax sdk in swift"
 
   # This description is used to generate tags and improve search results.
@@ -72,6 +72,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/AlexandreBarbier/GDAXSwift.git", :tag => "#{s.version}" }
   s.dependency 'Starscream'
+  s.dependency 'CryptoSwift'
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
