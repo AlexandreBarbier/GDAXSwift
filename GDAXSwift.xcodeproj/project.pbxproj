@@ -13,6 +13,9 @@
 		8D0F9BFF1FD9F75A00FD16E5 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F9BFE1FD9F75A00FD16E5 /* Account.swift */; };
 		8D0F9C021FDA64ED00FD16E5 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F9C011FDA64ED00FD16E5 /* Activity.swift */; };
 		8D0F9C041FDA67DC00FD16E5 /* Hold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F9C031FDA67DC00FD16E5 /* Hold.swift */; };
+		8D0F9C061FDA6BBE00FD16E5 /* GDAXSwiftAUthenticateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F9C051FDA6BBE00FD16E5 /* GDAXSwiftAUthenticateTest.swift */; };
+		8D0F9C081FDA880C00FD16E5 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F9C071FDA880C00FD16E5 /* Order.swift */; };
+		8D0F9C0A1FDA8AA800FD16E5 /* OrderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F9C091FDA8AA800FD16E5 /* OrderResponse.swift */; };
 		8D4401001FD5474D00232859 /* GDAXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4400F61FD5474D00232859 /* GDAXSwift.framework */; };
 		8D4401051FD5474D00232859 /* GDAXSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4401041FD5474D00232859 /* GDAXSwiftTests.swift */; };
 		8D4401071FD5474D00232859 /* GDAXSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D4400F91FD5474D00232859 /* GDAXSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,6 +49,9 @@
 		8D0F9BFE1FD9F75A00FD16E5 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		8D0F9C011FDA64ED00FD16E5 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		8D0F9C031FDA67DC00FD16E5 /* Hold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hold.swift; sourceTree = "<group>"; };
+		8D0F9C051FDA6BBE00FD16E5 /* GDAXSwiftAUthenticateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAXSwiftAUthenticateTest.swift; sourceTree = "<group>"; };
+		8D0F9C071FDA880C00FD16E5 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		8D0F9C091FDA8AA800FD16E5 /* OrderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderResponse.swift; sourceTree = "<group>"; };
 		8D4400F61FD5474D00232859 /* GDAXSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GDAXSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4400F91FD5474D00232859 /* GDAXSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDAXSwift.h; sourceTree = "<group>"; };
 		8D4400FF1FD5474D00232859 /* GDAXSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GDAXSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +109,8 @@
 				8D0F9BFE1FD9F75A00FD16E5 /* Account.swift */,
 				8D0F9C011FDA64ED00FD16E5 /* Activity.swift */,
 				8D0F9C031FDA67DC00FD16E5 /* Hold.swift */,
+				8D0F9C071FDA880C00FD16E5 /* Order.swift */,
+				8D0F9C091FDA8AA800FD16E5 /* OrderResponse.swift */,
 			);
 			path = Authenticate;
 			sourceTree = "<group>";
@@ -152,6 +160,7 @@
 			children = (
 				8D4401041FD5474D00232859 /* GDAXSwiftTests.swift */,
 				8D7D64301FD69E7A00A8DD80 /* Info.plist */,
+				8D0F9C051FDA6BBE00FD16E5 /* GDAXSwiftAUthenticateTest.swift */,
 			);
 			path = GDAXSwiftTests;
 			sourceTree = "<group>";
@@ -416,9 +425,11 @@
 				8D6143ED1FD54BB80089A5AC /* TickerResponse.swift in Sources */,
 				8D4CDF1A1FD70482009A6C6B /* Level2Response.swift in Sources */,
 				8D6143F01FD54BC80089A5AC /* Feed.swift in Sources */,
+				8D0F9C081FDA880C00FD16E5 /* Order.swift in Sources */,
 				8D8EBE401FD83B070005B86B /* TradeResponse.swift in Sources */,
 				8D0F9C021FDA64ED00FD16E5 /* Activity.swift in Sources */,
 				8DD3181A1FD8177200BB245F /* Market.swift in Sources */,
+				8D0F9C0A1FDA8AA800FD16E5 /* OrderResponse.swift in Sources */,
 				8D6143EE1FD54BB80089A5AC /* Response.swift in Sources */,
 				8D4401111FD5477C00232859 /* GDAX.swift in Sources */,
 				8D0BD4C41FD9D4B8005F9BB6 /* Authenticate.swift in Sources */,
@@ -430,6 +441,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D0F9C061FDA6BBE00FD16E5 /* GDAXSwiftAUthenticateTest.swift in Sources */,
 				8D4401051FD5474D00232859 /* GDAXSwiftTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

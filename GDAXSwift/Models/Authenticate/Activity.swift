@@ -16,7 +16,7 @@ public struct ActivityDetail: Codable {
 
 open class Activity: Codable {
 
-    public var id: Int?
+    public var id: String?
     public var created_at: String?
     public var amount: String?
     public var balance: String?

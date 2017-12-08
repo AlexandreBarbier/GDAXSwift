@@ -7,7 +7,7 @@
 //
 
 import UIKit
-var BASE_URL = "https://api.gdax.com"
+var BASE_URL = "https://api-public.sandbox.gdax.com"
 
 open class Market: NSObject {
     static let client = Market()
