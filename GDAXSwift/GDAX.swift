@@ -11,4 +11,5 @@ import UIKit
 open class GDAX: NSObject {
     public static var feed = Feed.client
     public static var market = Market.client
+    public static var authenticate = Authenticate.client
 }

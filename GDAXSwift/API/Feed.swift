@@ -52,7 +52,7 @@ open class Feed: NSObject {
     private var level2Handlers: [String: Level2Handler] = [:]
     
     private let ws = WebSocket(url: URL(string: "wss://ws-feed.gdax.com")!)
-    
+    private var openingSocket = false
     public static let client = Feed()
     public var errorHandler: ((_ error: Error?) -> Void)?
     public var isConnected: Bool { return ws.isConnected }
@@ -99,6 +99,7 @@ open class Feed: NSObject {
             }
         }
         ws.onConnect = {
+            self.openingSocket = false
             self.onConnectionChange?(self.isConnected)
             for msg in self.requestedMessage {
                 self.ws.write(string: msg)
@@ -109,31 +110,44 @@ open class Feed: NSObject {
             self.errorHandler?(error)
         }
         ws.connect()
+        openingSocket = true
     }
     
-    private func getSubscription(name: String, product: String) -> String {
-        return "{\"type\": \"subscribe\", \"channels\": [{ \"name\": \"\(name)\", \"product_ids\": [\"\(product)\"]}]}"
+    private func getSubscription(name: String, product: [String]) -> String {
+        return "{\"type\": \"subscribe\", \"channels\": [{ \"name\": \"\(name)\", \"product_ids\": [\"\(product.joined(separator: ","))\"]}]}"
     }
-    
-    public func subscribeTicker(for product: gdax_value, responseHandler: @escaping TickerHandler) {
-        let prod = product.from.getProductId(for: product.to)
-        tickerHandlers[prod] = responseHandler
-        let msg = getSubscription(name: "ticker", product: prod)
-        ws.isConnected ? ws.write(string: msg) : requestedMessage.append(msg)
-    }
-    
-    public func subscribeHeartbeat(for product: gdax_value, responseHandler: @escaping HeartbeatHandler) {
-        let prod = product.from.getProductId(for: product.to)
-        heartbeatHandlers[prod] = responseHandler
-        let msg = getSubscription(name: "heartbeat", product: prod)
-        ws.isConnected ? ws.write(string: msg) : requestedMessage.append(msg)
-    }
-    
-    public func subscribeLevel2(for product: gdax_value, responseHandler: @escaping Level2Handler) {
-        let prod = product.from.getProductId(for: product.to)
-        level2Handlers[prod] = responseHandler
-        let msg = getSubscription(name: "level2", product: prod)
+
+    fileprivate func subscribe(_ prods: [String],_ name: String) {
+        let msg = getSubscription(name: name, product: prods)
+        !ws.isConnected && !openingSocket ? ws.connect() : ()
         ws.isConnected ? ws.write(string:msg) : requestedMessage.append(msg)
+    }
+
+    public func subscribeTicker(for products: [gdax_value], responseHandler: @escaping TickerHandler) {
+        let prods:[String] = products.map({
+            let res = $0.from.getProductId(for: $0.to)
+            tickerHandlers[res] = responseHandler
+            return res
+        })
+        subscribe(prods, "ticker")
+    }
+    
+    public func subscribeHeartbeat(for products: [gdax_value], responseHandler: @escaping HeartbeatHandler) {
+        let prods:[String] = products.map({
+            let res = $0.from.getProductId(for: $0.to)
+            heartbeatHandlers[res] = responseHandler
+            return res
+        })
+        subscribe(prods, "heartbeat")
+    }
+
+    public func subscribeLevel2(for products: [gdax_value], responseHandler: @escaping Level2Handler) {
+        let prods:[String] = products.map({
+            let res = $0.from.getProductId(for: $0.to)
+            level2Handlers[res] = responseHandler
+            return res
+        })
+        subscribe(prods, "level2")
     }
     
     public func disconectFrom(channel: FeedType, product: String) {

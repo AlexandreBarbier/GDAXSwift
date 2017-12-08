@@ -16,6 +16,7 @@ open class Market: NSObject {
 
     private override init() {
         let config = URLSessionConfiguration.default
+        queue.name = "market_queue"
         session = URLSession(configuration: config, delegate: nil, delegateQueue: queue)
         super.init()
     }
@@ -55,22 +56,26 @@ open class Market: NSObject {
                     if key == "bids" {
                         var elems:[baObject] = []
                         for v in val as! [[Any]] {
-                            let bao = baObject(price: v[0] as! String, size: v[1] as! String, order_id: v[2] is String ? v[2] as? String : nil, num_order:v[2] is Int ? v[2] as? Int : nil)
-                            elems.append(bao)
+
+                            elems.append(baObject(price: v[0] as! String,
+                                                  size: v[1] as! String,
+                                                  order_id: v[2] is String ? v[2] as? String : nil,
+                                                  num_order:v[2] is Int ? v[2] as? Int : nil))
                         }
                         resp.bids?.append(elems)
                     } else if key == "asks" {
                         var elems:[baObject] = []
                         for v in val as! [[Any]] {
-                            let bao = baObject(price: v[0] as! String, size: v[1] as! String, order_id: v[2] is String ? v[2] as? String : nil, num_order:v[2] is Int ? v[2] as? Int : nil)
-                            elems.append(bao)
+                            elems.append(baObject(price: v[0] as! String,
+                                                  size: v[1] as! String,
+                                                  order_id: v[2] is String ? v[2] as? String : nil,
+                                                  num_order:v[2] is Int ? v[2] as? Int : nil))
                         }
                         resp.asks?.append(elems)
                     }
                 }
                 completion(resp)
-            }.resume()
+                }.resume()
         }
     }
-
 }

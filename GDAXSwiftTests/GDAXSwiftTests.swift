@@ -12,7 +12,8 @@ import XCTest
 class GDAXSwiftTests: XCTestCase {
     
     override func setUp() {
-        super.setUp()        
+        super.setUp()
+        //put your credentials here (GDAX API key secret etc)
     }
     
     override func tearDown() {
@@ -23,7 +24,7 @@ class GDAXSwiftTests: XCTestCase {
     func testTicker() {
         let expect = expectation(description:"")
         
-        GDAX.feed.subscribeTicker(for: gdax_value(from:.LTC, to:.BTC)) { (message) in
+        GDAX.feed.subscribeTicker(for: [gdax_value(from:.LTC, to:.BTC)]) { (message) in
             GDAX.feed.disconectFrom(channel: .ticker, product: GDAXProductsId.LTC_BTC)
             XCTAssert(message.product_id == "LTC-BTC")            
             expect.fulfill()
@@ -38,7 +39,7 @@ class GDAXSwiftTests: XCTestCase {
     func testHeartbeat() {
         let expect = expectation(description:"")
         
-        GDAX.feed.subscribeHeartbeat(for: gdax_value(from:.LTC, to:.BTC)) { (message) in
+        GDAX.feed.subscribeHeartbeat(for: [gdax_value(from:.LTC, to:.BTC)]) { (message) in
             GDAX.feed.disconectFrom(channel: .heartbeat, product: GDAXProductsId.LTC_BTC)
             XCTAssert(message.product_id == "LTC-BTC")
             expect.fulfill()
@@ -105,7 +106,7 @@ class GDAXSwiftTests: XCTestCase {
     func testLevel2() {
         let expect = expectation(description:"")
         
-        GDAX.feed.subscribeLevel2(for: gdax_value(from: .LTC, to: .BTC)) { (message) in
+        GDAX.feed.subscribeLevel2(for: [gdax_value(from: .LTC, to: .BTC)]) { (message) in
             GDAX.feed.disconectFrom(channel: .l2update, product: GDAXProductsId.LTC_BTC)
             XCTAssert(message.product_id == "LTC-BTC")
             expect.fulfill()
@@ -116,7 +117,59 @@ class GDAXSwiftTests: XCTestCase {
             }
         }
     }
-    
+
+    func testAccounts() {
+        let expect = expectation(description: "")
+        GDAX.authenticate.getAccounts { accounts, error in
+            XCTAssert(accounts != nil && accounts!.count > 0)
+            expect.fulfill()
+        }
+        waitForExpectations(timeout:5.0) { (error) in
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            }
+        }
+    }
+
+    func testAccount() {
+        let expect = expectation(description: "")
+        GDAX.authenticate.getAccount(accountId: "ACCOUNT_ID") { account, error in
+            XCTAssert(account != nil && account!.id == "ACCOUNT_ID")
+            expect.fulfill()
+        }
+        waitForExpectations(timeout:5.0) { (error) in
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            }
+        }
+    }
+
+    func testAccountHistory() {
+        let expect = expectation(description: "")
+        GDAX.authenticate.getAccountHistory(accountId: "ACCOUNT_ID") { activities, error in
+            XCTAssert(activities != nil && activities!.count > 0)
+            expect.fulfill()
+        }
+        waitForExpectations(timeout:5.0) { (error) in
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            }
+        }
+    }
+
+    func testAccountHolds() {
+        let expect = expectation(description: "")
+        GDAX.authenticate.getAccountHolds(accountId: "ACCOUNT_ID") { holds, error in
+            XCTAssert(holds != nil && holds!.count > 0)
+            expect.fulfill()
+        }
+        waitForExpectations(timeout:5.0) { (error) in
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            }
+        }
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

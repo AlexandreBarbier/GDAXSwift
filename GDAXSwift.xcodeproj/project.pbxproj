@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		16583885F4457E3C56BC32D0 /* Pods_GDAXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E64050368745DC6E9B63776 /* Pods_GDAXSwift.framework */; };
 		4F856E3C4FBC4EE97DFD4ED6 /* Pods_GDAXSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46287BA462F34665F0581F90 /* Pods_GDAXSwiftTests.framework */; };
+		8D0BD4C41FD9D4B8005F9BB6 /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0BD4C31FD9D4B8005F9BB6 /* Authenticate.swift */; };
+		8D0F9BFF1FD9F75A00FD16E5 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F9BFE1FD9F75A00FD16E5 /* Account.swift */; };
+		8D0F9C021FDA64ED00FD16E5 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F9C011FDA64ED00FD16E5 /* Activity.swift */; };
+		8D0F9C041FDA67DC00FD16E5 /* Hold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F9C031FDA67DC00FD16E5 /* Hold.swift */; };
 		8D4401001FD5474D00232859 /* GDAXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4400F61FD5474D00232859 /* GDAXSwift.framework */; };
 		8D4401051FD5474D00232859 /* GDAXSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4401041FD5474D00232859 /* GDAXSwiftTests.swift */; };
 		8D4401071FD5474D00232859 /* GDAXSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D4400F91FD5474D00232859 /* GDAXSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -18,8 +22,6 @@
 		8D6143ED1FD54BB80089A5AC /* TickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EB1FD54BB80089A5AC /* TickerResponse.swift */; };
 		8D6143EE1FD54BB80089A5AC /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EC1FD54BB80089A5AC /* Response.swift */; };
 		8D6143F01FD54BC80089A5AC /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EF1FD54BC80089A5AC /* Feed.swift */; };
-		8D7D64311FD69E7A00A8DD80 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D64301FD69E7A00A8DD80 /* Info.plist */; };
-		8D7D64321FD69E8100A8DD80 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D642E1FD69E5100A8DD80 /* Info.plist */; };
 		8D8EBE401FD83B070005B86B /* TradeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EBE3F1FD83B070005B86B /* TradeResponse.swift */; };
 		8DD3181A1FD8177200BB245F /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD318191FD8177200BB245F /* Market.swift */; };
 		8DD3181D1FD81B2900BB245F /* BookResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD3181C1FD81B2900BB245F /* BookResponse.swift */; };
@@ -40,6 +42,10 @@
 		26699FC57072A9F01EFE38B1 /* Pods-GDAXSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GDAXSwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GDAXSwiftTests/Pods-GDAXSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2F1B64FB622D6B34308746C2 /* Pods-GDAXSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GDAXSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GDAXSwift/Pods-GDAXSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		46287BA462F34665F0581F90 /* Pods_GDAXSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GDAXSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D0BD4C31FD9D4B8005F9BB6 /* Authenticate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
+		8D0F9BFE1FD9F75A00FD16E5 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		8D0F9C011FDA64ED00FD16E5 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		8D0F9C031FDA67DC00FD16E5 /* Hold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hold.swift; sourceTree = "<group>"; };
 		8D4400F61FD5474D00232859 /* GDAXSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GDAXSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4400F91FD5474D00232859 /* GDAXSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDAXSwift.h; sourceTree = "<group>"; };
 		8D4400FF1FD5474D00232859 /* GDAXSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GDAXSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +97,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8D0F9BFD1FD9F73D00FD16E5 /* Authenticate */ = {
+			isa = PBXGroup;
+			children = (
+				8D0F9BFE1FD9F75A00FD16E5 /* Account.swift */,
+				8D0F9C011FDA64ED00FD16E5 /* Activity.swift */,
+				8D0F9C031FDA67DC00FD16E5 /* Hold.swift */,
+			);
+			path = Authenticate;
+			sourceTree = "<group>";
+		};
+		8D0F9C001FDA5BCD00FD16E5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		8D4400EC1FD5474D00232859 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +137,7 @@
 		8D4400F81FD5474D00232859 /* GDAXSwift */ = {
 			isa = PBXGroup;
 			children = (
+				8D0F9C001FDA5BCD00FD16E5 /* Helpers */,
 				8D4401131FD54A4D00232859 /* API */,
 				8D4401121FD54A4200232859 /* Models */,
 				8D4400F91FD5474D00232859 /* GDAXSwift.h */,
@@ -135,6 +159,7 @@
 		8D4401121FD54A4200232859 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8D0F9BFD1FD9F73D00FD16E5 /* Authenticate */,
 				8DD3181B1FD81AF500BB245F /* Market */,
 				8D4CDF181FD70256009A6C6B /* Feed */,
 			);
@@ -146,6 +171,7 @@
 			children = (
 				8D6143EF1FD54BC80089A5AC /* Feed.swift */,
 				8DD318191FD8177200BB245F /* Market.swift */,
+				8D0BD4C31FD9D4B8005F9BB6 /* Authenticate.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -241,7 +267,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Alexandre Barbier";
 				TargetAttributes = {
 					8D4400F51FD5474D00232859 = {
@@ -278,7 +304,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D7D64321FD69E8100A8DD80 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,7 +311,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D7D64311FD69E7A00A8DD80 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,10 +324,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GDAXSwiftTests/Pods-GDAXSwiftTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,13 +411,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D4CDF171FD701F7009A6C6B /* HeartbeatResponse.swift in Sources */,
+				8D0F9C041FDA67DC00FD16E5 /* Hold.swift in Sources */,
+				8D0F9BFF1FD9F75A00FD16E5 /* Account.swift in Sources */,
 				8D6143ED1FD54BB80089A5AC /* TickerResponse.swift in Sources */,
 				8D4CDF1A1FD70482009A6C6B /* Level2Response.swift in Sources */,
 				8D6143F01FD54BC80089A5AC /* Feed.swift in Sources */,
 				8D8EBE401FD83B070005B86B /* TradeResponse.swift in Sources */,
+				8D0F9C021FDA64ED00FD16E5 /* Activity.swift in Sources */,
 				8DD3181A1FD8177200BB245F /* Market.swift in Sources */,
 				8D6143EE1FD54BB80089A5AC /* Response.swift in Sources */,
 				8D4401111FD5477C00232859 /* GDAX.swift in Sources */,
+				8D0BD4C41FD9D4B8005F9BB6 /* Authenticate.swift in Sources */,
 				8DD3181D1FD81B2900BB245F /* BookResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

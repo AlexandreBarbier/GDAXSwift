@@ -7,7 +7,8 @@ target 'GDAXSwift' do
 
   # Pods for GDAXSwift
   pod 'Starscream'
-
+  pod 'CryptoSwift'
+  
   target 'GDAXSwiftTests' do
     inherit! :search_paths
     # Pods for testing
