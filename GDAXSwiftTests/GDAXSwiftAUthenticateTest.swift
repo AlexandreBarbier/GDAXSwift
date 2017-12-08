@@ -9,12 +9,11 @@
 import XCTest
 @testable import GDAXSwift
 
-
 class GDAXSwiftAUthenticateTest: XCTestCase {
     override func setUp() {
         super.setUp()
         //put your credentials here (GDAX API key secret etc)
-
+        
     }
 
     override func tearDown() {
