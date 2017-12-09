@@ -24,12 +24,12 @@ class GDAXSwiftTests: XCTestCase {
     func testTicker() {
         let expect = expectation(description:"")
         
-        GDAX.feed.subscribeTicker(for: [gdax_value(from:.LTC, to:.BTC)]) { (message) in
-            GDAX.feed.disconectFrom(channel: .ticker, product: GDAXProductsId.LTC_BTC)
+        let sub = GDAX.feed.subscribeTicker(for: [gdax_value(from:.LTC, to:.BTC)]) { (message) in
             XCTAssert(message.product_id == "LTC-BTC")            
             expect.fulfill()
         }
         waitForExpectations(timeout:5.0) { (error) in
+            sub.unsubscribe()
             if error != nil {
                 XCTFail(error!.localizedDescription)
             }
@@ -39,12 +39,12 @@ class GDAXSwiftTests: XCTestCase {
     func testHeartbeat() {
         let expect = expectation(description:"")
         
-        GDAX.feed.subscribeHeartbeat(for: [gdax_value(from:.LTC, to:.BTC)]) { (message) in
-            GDAX.feed.disconectFrom(channel: .heartbeat, product: GDAXProductsId.LTC_BTC)
+        let sub = GDAX.feed.subscribeHeartbeat(for: [gdax_value(from:.LTC, to:.BTC)]) { (message) in
             XCTAssert(message.product_id == "LTC-BTC")
             expect.fulfill()
         }
         waitForExpectations(timeout:5.0) { (error) in
+            sub.unsubscribe()
             if error != nil {
                 XCTFail(error!.localizedDescription)
             }
@@ -106,12 +106,12 @@ class GDAXSwiftTests: XCTestCase {
     func testLevel2() {
         let expect = expectation(description:"")
         
-        GDAX.feed.subscribeLevel2(for: [gdax_value(from: .LTC, to: .BTC)]) { (message) in
-            GDAX.feed.disconectFrom(channel: .l2update, product: GDAXProductsId.LTC_BTC)
+        let sub = GDAX.feed.subscribeLevel2(for: [gdax_value(from: .LTC, to: .BTC)]) { (message) in
             XCTAssert(message.product_id == "LTC-BTC")
             expect.fulfill()
         }
         waitForExpectations(timeout:5.0) { (error) in
+            sub.unsubscribe()
             if error != nil {
                 XCTFail(error!.localizedDescription)
             }

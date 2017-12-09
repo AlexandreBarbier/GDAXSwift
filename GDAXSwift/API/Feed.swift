@@ -66,7 +66,7 @@ open class Feed: NSObject {
                 return
             }
             let decoder = JSONDecoder()
-            
+
             do {
                 let k  = try decoder.decode(Response.self, from: response)
                 guard let da2 = message.data(using: .utf8),
@@ -77,20 +77,37 @@ open class Feed: NSObject {
                 switch fType {
                 case .ticker:
                     let tick = try decoder.decode(TickerResponse.self, from: da2)
-                    if let handler = self.tickerHandlers[tick.product_id!] {
-                        handler(tick)
+                    let keys = self.tickerHandlers.keys.filter({ (key) -> Bool in
+                        return key.contains(tick.product_id!)
+                    })
+                    for key in keys {
+                        if let handler = self.tickerHandlers[key] {
+                            handler(tick)
+                        }
                     }
+
                     break
                 case .heartbeat:
                     let heartbeat = try decoder.decode(HeartbeatResponse.self, from: da2)
-                    if let handler = self.heartbeatHandlers[heartbeat.product_id!] {
-                        handler(heartbeat)
+                    let keys = self.heartbeatHandlers.keys.filter({ (key) -> Bool in
+                        return key.contains(heartbeat.product_id!)
+                    })
+                    for key in keys {
+                        if let handler = self.heartbeatHandlers[key] {
+                            handler(heartbeat)
+                        }
                     }
                     break
                 case .l2update:
                     let l2update = try decoder.decode(Level2Response.self, from: da2)
-                    if let handler = self.level2Handlers[l2update.product_id!] {
-                        handler(l2update)
+
+                    let keys = self.level2Handlers.keys.filter({ (key) -> Bool in
+                        return key.contains(l2update.product_id!)
+                    })
+                    for key in keys {
+                        if let handler = self.level2Handlers[key] {
+                            handler(l2update)
+                        }
                     }
                     break
                 }
@@ -123,31 +140,46 @@ open class Feed: NSObject {
         ws.isConnected ? ws.write(string:msg) : requestedMessage.append(msg)
     }
 
-    public func subscribeTicker(for products: [gdax_value], responseHandler: @escaping TickerHandler) {
+    public func subscribeTicker(for products: [gdax_value], responseHandler: @escaping TickerHandler) -> Subscription {
+        let sub = Subscription()
+        sub.channel = .ticker
         let prods:[String] = products.map({
-            let res = $0.from.getProductId(for: $0.to)
-            tickerHandlers[res] = responseHandler
-            return res
+            let prod = $0.from.getProductId(for: $0.to)
+            sub.products.append(prod)
+            let id = "\(sub.id).\(prod)"
+            tickerHandlers[id] = responseHandler
+            return prod
         })
         subscribe(prods, "ticker")
+        return sub
     }
     
-    public func subscribeHeartbeat(for products: [gdax_value], responseHandler: @escaping HeartbeatHandler) {
+    public func subscribeHeartbeat(for products: [gdax_value], responseHandler: @escaping HeartbeatHandler) -> Subscription {
+        let sub = Subscription()
+        sub.channel = .heartbeat
         let prods:[String] = products.map({
-            let res = $0.from.getProductId(for: $0.to)
-            heartbeatHandlers[res] = responseHandler
-            return res
+            let prod = $0.from.getProductId(for: $0.to)
+            sub.products.append(prod)
+            let id = "\(sub.id).\(prod)"
+            heartbeatHandlers[id] = responseHandler
+            return prod
         })
         subscribe(prods, "heartbeat")
+        return sub
     }
 
-    public func subscribeLevel2(for products: [gdax_value], responseHandler: @escaping Level2Handler) {
+    public func subscribeLevel2(for products: [gdax_value], responseHandler: @escaping Level2Handler) -> Subscription {
+        let sub = Subscription()
+        sub.channel = .l2update
         let prods:[String] = products.map({
-            let res = $0.from.getProductId(for: $0.to)
-            level2Handlers[res] = responseHandler
-            return res
+            let prod = $0.from.getProductId(for: $0.to)
+            sub.products.append(prod)
+            let id = "\(sub.id).\(prod)"
+            level2Handlers[id] = responseHandler
+            return prod
         })
         subscribe(prods, "level2")
+        return sub
     }
     
     public func disconectFrom(channel: FeedType, product: String) {

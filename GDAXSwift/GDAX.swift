@@ -11,9 +11,9 @@ import UIKit
 open class GDAX: NSObject {
     public static var feed: Feed {return Feed.client }
     public static var market: Market { return Market.client }
-    public static var isAuthenticated: Bool { return UserDefaults.standard.value(forKey: "CB_ACCESS_KEY") == nil }
+    public static var isAuthenticated: Bool { return UserDefaults.standard.value(forKey: "CB_ACCESS_KEY") != nil }
     public static var authenticate:Authenticate { return Authenticate.client }
-    
+
     public static func askForAuthentication(inVC:UIViewController, completion:@escaping(_ granted: Bool)-> Void) {
         if UserDefaults.standard.value(forKey: "CB_ACCESS_KEY") == nil  {
             func validateTF(textfields: [UITextField]) -> Bool {
@@ -23,7 +23,7 @@ open class GDAX: NSObject {
                 }
                 return res
             }
-            let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+            let alert = UIAlertController(title: "Enter your credentials", message: "", preferredStyle: .alert)
             alert.addTextField(configurationHandler: { (key) in
                 key.placeholder = "Your API key"
             })
@@ -49,7 +49,8 @@ open class GDAX: NSObject {
             alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) in
                 completion(false)
             }))
-            alert.show(inVC, sender: nil)
+            inVC.present(alert, animated: true, completion: nil)
         }
     }
 }
+
