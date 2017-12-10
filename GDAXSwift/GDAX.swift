@@ -9,6 +9,7 @@
 import UIKit
 
 open class GDAX: NSObject {
+    public static var debug = false
     public static var feed: Feed {return Feed.client }
     public static var market: Market { return Market.client }
     public static var isAuthenticated: Bool { return UserDefaults.standard.value(forKey: "CB_ACCESS_KEY") != nil }

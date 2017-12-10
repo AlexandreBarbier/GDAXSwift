@@ -26,6 +26,7 @@
 		8D6143ED1FD54BB80089A5AC /* TickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EB1FD54BB80089A5AC /* TickerResponse.swift */; };
 		8D6143EE1FD54BB80089A5AC /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EC1FD54BB80089A5AC /* Response.swift */; };
 		8D6143F01FD54BC80089A5AC /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EF1FD54BC80089A5AC /* Feed.swift */; };
+		8D63A0651FDCFFDB00A5FE34 /* LastTickResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D63A0641FDCFFDB00A5FE34 /* LastTickResponse.swift */; };
 		8D8EBE401FD83B070005B86B /* TradeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EBE3F1FD83B070005B86B /* TradeResponse.swift */; };
 		8DD3181A1FD8177200BB245F /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD318191FD8177200BB245F /* Market.swift */; };
 		8DD3181D1FD81B2900BB245F /* BookResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD3181C1FD81B2900BB245F /* BookResponse.swift */; };
@@ -64,6 +65,7 @@
 		8D6143EB1FD54BB80089A5AC /* TickerResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickerResponse.swift; sourceTree = "<group>"; };
 		8D6143EC1FD54BB80089A5AC /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		8D6143EF1FD54BC80089A5AC /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		8D63A0641FDCFFDB00A5FE34 /* LastTickResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTickResponse.swift; sourceTree = "<group>"; };
 		8D7D642E1FD69E5100A8DD80 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7D64301FD69E7A00A8DD80 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D8EBE3F1FD83B070005B86B /* TradeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeResponse.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			children = (
 				8DD3181C1FD81B2900BB245F /* BookResponse.swift */,
 				8D8EBE3F1FD83B070005B86B /* TradeResponse.swift */,
+				8D63A0641FDCFFDB00A5FE34 /* LastTickResponse.swift */,
 			);
 			path = Market;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				8D4CDF171FD701F7009A6C6B /* HeartbeatResponse.swift in Sources */,
 				8D0F9C041FDA67DC00FD16E5 /* Hold.swift in Sources */,
 				8D29CC841FDBC711002F3EB2 /* Subscription.swift in Sources */,
+				8D63A0651FDCFFDB00A5FE34 /* LastTickResponse.swift in Sources */,
 				8D0F9BFF1FD9F75A00FD16E5 /* Account.swift in Sources */,
 				8D6143ED1FD54BB80089A5AC /* TickerResponse.swift in Sources */,
 				8D4CDF1A1FD70482009A6C6B /* Level2Response.swift in Sources */,

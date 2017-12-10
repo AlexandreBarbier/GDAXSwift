@@ -1,6 +1,6 @@
 PODS:
   - CryptoSwift (0.8.0)
-  - Starscream (3.0.2)
+  - Starscream (3.0.3)
 
 DEPENDENCIES:
   - CryptoSwift
@@ -8,7 +8,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
-  Starscream: b512c62f6706421221b5ceb2ba01a9f58aca5bea
+  Starscream: dfb1b3f39506717ee52b67fb48de0c8269504cbc
 
 PODFILE CHECKSUM: f01d1b8111559b1af3339473ffcb0c01f360e622
 

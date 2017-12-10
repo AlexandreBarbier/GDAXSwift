@@ -39,13 +39,18 @@ public struct gdax_value {
         self.from = from
         self.to = to
     }
+    
+    func toString() -> String {
+        return "\(from)-\(to)"
+    }
+
 }
 
 open class Feed: NSObject {
     public typealias TickerHandler = (_ message: TickerResponse) -> Void
     public typealias HeartbeatHandler = (_ message: HeartbeatResponse) -> Void
     public typealias Level2Handler = (_ message: Level2Response) -> Void
-    
+    public typealias ConnectionChangeHandler = ((_ connected: Bool) -> Void)
     private var requestedMessage: [String] = []
     private var tickerHandlers: [String: TickerHandler] = [:]
     private var heartbeatHandlers: [String: HeartbeatHandler] = [:]
@@ -57,7 +62,7 @@ open class Feed: NSObject {
     public var errorHandler: ((_ error: Error?) -> Void)?
     public var isConnected: Bool { return ws.isConnected }
 
-    public var onConnectionChange:((_ connected: Bool) -> Void)?
+    public var onConnectionChange:[ConnectionChangeHandler]?
 
     private override init() {
         super.init()
@@ -117,13 +122,17 @@ open class Feed: NSObject {
         }
         ws.onConnect = {
             self.openingSocket = false
-            self.onConnectionChange?(self.isConnected)
+            self.onConnectionChange?.forEach({ (handler) in
+                handler(self.isConnected)
+            })
             for msg in self.requestedMessage {
                 self.ws.write(string: msg)
             }
         }
         ws.onDisconnect = { error in
-            self.onConnectionChange?(self.isConnected)
+            self.onConnectionChange?.forEach({ (handler) in
+                handler(self.isConnected)
+            })
             self.errorHandler?(error)
         }
         ws.connect()

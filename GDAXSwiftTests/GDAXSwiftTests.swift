@@ -103,6 +103,19 @@ class GDAXSwiftTests: XCTestCase {
         }
     }
 
+    func testProductLastTick() {
+        let expect = expectation(description:"")
+
+        GDAX.market.product(productId: "BTC-USD").getLastTick { (response, error) in
+            expect.fulfill()
+        }
+        waitForExpectations(timeout:5.0) { (error) in
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            }
+        }
+    }
+
     func testLevel2() {
         let expect = expectation(description:"")
         

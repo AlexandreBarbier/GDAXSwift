@@ -7,7 +7,8 @@
 //
 
 import UIKit
-var BASE_URL = "https://api-public.sandbox.gdax.com"
+
+var BASE_URL: String { return GDAX.debug ? "https://api-public.sandbox.gdax.com" : "https://api.gdax.com"}
 
 open class Market: NSObject {
     static let client = Market()
@@ -45,6 +46,23 @@ open class Market: NSObject {
                     completion(nil, error)
                 }
             }.resume()
+        }
+
+//GET /products/<product-id>/ticker
+        public func getLastTick(completion:@escaping(LastTickResponse?, Error?) -> Void) {
+            let request = URLRequest(url: URL(string:"\(BASE_URL)/products/\(product_id)/ticker")!)
+            Market.client.session.dataTask(with: request) { (data, response, error) in
+                guard error == nil else {
+                    completion(nil, error)
+                    return
+                }
+                do {
+                    let resp = try JSONDecoder().decode(LastTickResponse.self, from: data!)
+                    completion(resp, error)
+                } catch {
+                    completion(nil, error)
+                }
+                }.resume()
         }
 
         public func getBook(level:Int = 1, completion: @escaping(BookResponse)-> Void) {

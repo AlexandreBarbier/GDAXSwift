@@ -33,7 +33,7 @@ open class Authenticate: NSObject {
         super.init()
     }
 
-    private func createRequest(path: String,query: String? = nil, method:String, body: Data? = nil) -> URLRequest {
+    private func createRequest(path: String, query: String? = nil, method:String, body: Data? = nil) -> URLRequest {
         var request = URLRequest(url: URL(string:"\(BASE_URL)\(path)\(query ?? "")")!)
         let timestamp = Int64(Date().timeIntervalSince1970)
 
