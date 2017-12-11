@@ -39,7 +39,13 @@ public struct gdax_value {
         self.from = from
         self.to = to
     }
-    
+
+    public init(product_id: String) {
+        let value = product_id.split(separator: "-")
+        from = gdax_products(rawValue: String(value[0]))!
+        to = gdax_products(rawValue: String(value[1]))!
+    }
+
     func toString() -> String {
         return "\(from)-\(to)"
     }

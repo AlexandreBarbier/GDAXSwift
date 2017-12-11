@@ -37,8 +37,12 @@ class GDAXSwiftAUthenticateTest: XCTestCase {
     func testAccount() {
         let expect = expectation(description: "")
         GDAX.authenticate.getAccounts { accounts, error in
-            GDAX.authenticate.getAccount(accountId: accounts!.first!.id!) { account, error in
-                XCTAssert(account != nil && account!.id == accounts!.first!.id!)
+            guard let accounts = accounts else {
+                expect.fulfill()
+                return
+            }
+            GDAX.authenticate.getAccount(accountId: accounts.first!.id!) { account, error in
+                XCTAssert(account != nil && account!.id == accounts.first!.id!)
                 expect.fulfill()
             }
         }

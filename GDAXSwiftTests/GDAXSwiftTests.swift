@@ -54,7 +54,7 @@ class GDAXSwiftTests: XCTestCase {
     func testProductlevel1() {
         let expect = expectation(description:"")
 
-        GDAX.market.product(productId: "BTC-USD").getBook { (response) in
+        GDAX.market.product(productId: "LTC-EUR").getBook { (response) in
             expect.fulfill()
         }
         waitForExpectations(timeout:5.0) { (error) in
@@ -67,7 +67,7 @@ class GDAXSwiftTests: XCTestCase {
     func testProductlevel2() {
         let expect = expectation(description:"")
 
-        GDAX.market.product(productId: "BTC-USD").getBook(level: 2) { (response) in
+        GDAX.market.product(productId: "LTC-EUR").getBook(level: 2) { (response) in
             expect.fulfill()
         }
         waitForExpectations(timeout:5.0) { (error) in
@@ -80,7 +80,7 @@ class GDAXSwiftTests: XCTestCase {
     func testProductlevel3() {
         let expect = expectation(description:"")
 
-        GDAX.market.product(productId: "BTC-USD").getBook(level: 3) { (response) in
+        GDAX.market.product(productId: "LTC-EUR").getBook(level: 3) { (response) in
             expect.fulfill()
         }
         waitForExpectations(timeout:5.0) { (error) in
@@ -93,7 +93,7 @@ class GDAXSwiftTests: XCTestCase {
     func testProductTrades() {
         let expect = expectation(description:"")
 
-        GDAX.market.product(productId: "BTC-USD").getTrades { (response, error) in
+        GDAX.market.product(productId: "LTC-EUR").getTrades { (response, error) in
             expect.fulfill()
         }
         waitForExpectations(timeout:5.0) { (error) in
@@ -103,10 +103,25 @@ class GDAXSwiftTests: XCTestCase {
         }
     }
 
+    func testProductStats() {
+        let expect = expectation(description:"")
+
+        GDAX.market.product(productId: "LTC-EUR").get24hStats { (response, error) in
+            XCTAssert(response != nil)
+            expect.fulfill()
+        }
+        waitForExpectations(timeout:5.0) { (error) in
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            }
+        }
+    }
+
+
     func testProductLastTick() {
         let expect = expectation(description:"")
 
-        GDAX.market.product(productId: "BTC-USD").getLastTick { (response, error) in
+        GDAX.market.product(productId: "LTC-EUR").getLastTick { (response, error) in
             expect.fulfill()
         }
         waitForExpectations(timeout:5.0) { (error) in
@@ -119,9 +134,11 @@ class GDAXSwiftTests: XCTestCase {
     func testLevel2() {
         let expect = expectation(description:"")
         
-        let sub = GDAX.feed.subscribeLevel2(for: [gdax_value(from: .LTC, to: .BTC)]) { (message) in
-            XCTAssert(message.product_id == "LTC-BTC")
+        let sub = GDAX.feed.subscribeLevel2(for: [gdax_value(from: .LTC, to: .EUR)]) { (message) in
+
+            XCTAssert(message.product_id == "LTC-EUR")
             expect.fulfill()
+
         }
         waitForExpectations(timeout:5.0) { (error) in
             sub.unsubscribe()

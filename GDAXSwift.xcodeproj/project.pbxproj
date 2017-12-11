@@ -23,6 +23,7 @@
 		8D4401111FD5477C00232859 /* GDAX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4401101FD5477C00232859 /* GDAX.swift */; };
 		8D4CDF171FD701F7009A6C6B /* HeartbeatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CDF161FD701F7009A6C6B /* HeartbeatResponse.swift */; };
 		8D4CDF1A1FD70482009A6C6B /* Level2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4CDF191FD70482009A6C6B /* Level2Response.swift */; };
+		8D4FF6351FDEC1590036C52D /* StatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4FF6341FDEC1590036C52D /* StatResponse.swift */; };
 		8D6143ED1FD54BB80089A5AC /* TickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EB1FD54BB80089A5AC /* TickerResponse.swift */; };
 		8D6143EE1FD54BB80089A5AC /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EC1FD54BB80089A5AC /* Response.swift */; };
 		8D6143F01FD54BC80089A5AC /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6143EF1FD54BC80089A5AC /* Feed.swift */; };
@@ -62,6 +63,7 @@
 		8D4401101FD5477C00232859 /* GDAX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAX.swift; sourceTree = "<group>"; };
 		8D4CDF161FD701F7009A6C6B /* HeartbeatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatResponse.swift; sourceTree = "<group>"; };
 		8D4CDF191FD70482009A6C6B /* Level2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level2Response.swift; sourceTree = "<group>"; };
+		8D4FF6341FDEC1590036C52D /* StatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatResponse.swift; sourceTree = "<group>"; };
 		8D6143EB1FD54BB80089A5AC /* TickerResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TickerResponse.swift; sourceTree = "<group>"; };
 		8D6143EC1FD54BB80089A5AC /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		8D6143EF1FD54BC80089A5AC /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				8DD3181C1FD81B2900BB245F /* BookResponse.swift */,
 				8D8EBE3F1FD83B070005B86B /* TradeResponse.swift */,
 				8D63A0641FDCFFDB00A5FE34 /* LastTickResponse.swift */,
+				8D4FF6341FDEC1590036C52D /* StatResponse.swift */,
 			);
 			path = Market;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				8D63A0651FDCFFDB00A5FE34 /* LastTickResponse.swift in Sources */,
 				8D0F9BFF1FD9F75A00FD16E5 /* Account.swift in Sources */,
 				8D6143ED1FD54BB80089A5AC /* TickerResponse.swift in Sources */,
+				8D4FF6351FDEC1590036C52D /* StatResponse.swift in Sources */,
 				8D4CDF1A1FD70482009A6C6B /* Level2Response.swift in Sources */,
 				8D6143F01FD54BC80089A5AC /* Feed.swift in Sources */,
 				8D0F9C081FDA880C00FD16E5 /* Order.swift in Sources */,

@@ -48,7 +48,24 @@ open class Market: NSObject {
             }.resume()
         }
 
-//GET /products/<product-id>/ticker
+        public func get24hStats(completion: @escaping(StatResponse?, Error?) -> Void) {
+            let request = URLRequest(url: URL(string:"\(BASE_URL)/products/\(product_id)/stats")!)
+            Market.client.session.dataTask(with: request) { (data, response, error) in
+                guard error == nil else {
+                    completion(nil, error)
+                    return
+                }
+                do {
+                    let resp = try JSONDecoder().decode(StatResponse.self, from: data!)
+
+                    completion(resp, error)
+                } catch {
+                    completion(nil, error)
+                }
+                }.resume()
+        }
+
+
         public func getLastTick(completion:@escaping(LastTickResponse?, Error?) -> Void) {
             let request = URLRequest(url: URL(string:"\(BASE_URL)/products/\(product_id)/ticker")!)
             Market.client.session.dataTask(with: request) { (data, response, error) in
@@ -68,31 +85,36 @@ open class Market: NSObject {
         public func getBook(level:Int = 1, completion: @escaping(BookResponse)-> Void) {
             let request = URLRequest(url: URL(string:"\(BASE_URL)/products/\(product_id)/book\(level != 1 ? "?level=\(level)" : "")")!)
             Market.client.session.dataTask(with: request) { (data, response, error) in
-                let str = try! JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as? [String: Any]
-                let resp = try! JSONDecoder().decode(BookResponse.self, from: data!)
-                for (key, val) in str! {
-                    if key == "bids" {
-                        var elems:[baObject] = []
-                        for v in val as! [[Any]] {
+                do {
+                    let str = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as? [String: Any]
+                    let resp = try JSONDecoder().decode(BookResponse.self, from: data!)
+                    for (key, val) in str! {
+                        if key == "bids" {
+                            var elems:[baObject] = []
+                            for v in val as! [[Any]] {
 
-                            elems.append(baObject(price: v[0] as! String,
-                                                  size: v[1] as! String,
-                                                  order_id: v[2] is String ? v[2] as? String : nil,
-                                                  num_order:v[2] is Int ? v[2] as? Int : nil))
+                                elems.append(baObject(price: v[0] as! String,
+                                                      size: v[1] as! String,
+                                                      order_id: v[2] is String ? v[2] as? String : nil,
+                                                      num_order:v[2] is Int ? v[2] as? Int : nil))
+                            }
+                            resp.bids?.append(elems)
+                        } else if key == "asks" {
+                            var elems:[baObject] = []
+                            for v in val as! [[Any]] {
+                                elems.append(baObject(price: v[0] as! String,
+                                                      size: v[1] as! String,
+                                                      order_id: v[2] is String ? v[2] as? String : nil,
+                                                      num_order:v[2] is Int ? v[2] as? Int : nil))
+                            }
+                            resp.asks?.append(elems)
                         }
-                        resp.bids?.append(elems)
-                    } else if key == "asks" {
-                        var elems:[baObject] = []
-                        for v in val as! [[Any]] {
-                            elems.append(baObject(price: v[0] as! String,
-                                                  size: v[1] as! String,
-                                                  order_id: v[2] is String ? v[2] as? String : nil,
-                                                  num_order:v[2] is Int ? v[2] as? Int : nil))
-                        }
-                        resp.asks?.append(elems)
                     }
+                    completion(resp)
+                } catch {
+                    print("error")
                 }
-                completion(resp)
+
                 }.resume()
         }
     }
