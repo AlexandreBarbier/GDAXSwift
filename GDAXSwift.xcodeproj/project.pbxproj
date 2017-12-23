@@ -31,6 +31,7 @@
 		8D8EBE401FD83B070005B86B /* TradeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EBE3F1FD83B070005B86B /* TradeResponse.swift */; };
 		8DD3181A1FD8177200BB245F /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD318191FD8177200BB245F /* Market.swift */; };
 		8DD3181D1FD81B2900BB245F /* BookResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD3181C1FD81B2900BB245F /* BookResponse.swift */; };
+		8DD7F5E01FEC21F700B028D7 /* FullResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD7F5DF1FEC21F700B028D7 /* FullResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		8D8EBE3F1FD83B070005B86B /* TradeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeResponse.swift; sourceTree = "<group>"; };
 		8DD318191FD8177200BB245F /* Market.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
 		8DD3181C1FD81B2900BB245F /* BookResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookResponse.swift; sourceTree = "<group>"; };
+		8DD7F5DF1FEC21F700B028D7 /* FullResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullResponse.swift; sourceTree = "<group>"; };
 		9E64050368745DC6E9B63776 /* Pods_GDAXSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GDAXSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6D09DA7230233386D70224B /* Pods-GDAXSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GDAXSwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GDAXSwiftTests/Pods-GDAXSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -199,6 +201,7 @@
 				8D4CDF161FD701F7009A6C6B /* HeartbeatResponse.swift */,
 				8D4CDF191FD70482009A6C6B /* Level2Response.swift */,
 				8D29CC831FDBC711002F3EB2 /* Subscription.swift */,
+				8DD7F5DF1FEC21F700B028D7 /* FullResponse.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				8D29CC841FDBC711002F3EB2 /* Subscription.swift in Sources */,
 				8D63A0651FDCFFDB00A5FE34 /* LastTickResponse.swift in Sources */,
 				8D0F9BFF1FD9F75A00FD16E5 /* Account.swift in Sources */,
+				8DD7F5E01FEC21F700B028D7 /* FullResponse.swift in Sources */,
 				8D6143ED1FD54BB80089A5AC /* TickerResponse.swift in Sources */,
 				8D4FF6351FDEC1590036C52D /* StatResponse.swift in Sources */,
 				8D4CDF1A1FD70482009A6C6B /* Level2Response.swift in Sources */,

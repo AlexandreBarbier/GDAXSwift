@@ -19,4 +19,7 @@ open class Order: Codable {
     public var cancel_after: String?
     public var post_only: Bool?
 
+    public init() {
+
+    }
 }

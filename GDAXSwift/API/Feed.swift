@@ -56,12 +56,16 @@ open class Feed: NSObject {
     public typealias TickerHandler = (_ message: TickerResponse) -> Void
     public typealias HeartbeatHandler = (_ message: HeartbeatResponse) -> Void
     public typealias Level2Handler = (_ message: Level2Response) -> Void
+    public typealias FullHandler = (_ message: FullResponse) -> Void
+
     public typealias ConnectionChangeHandler = ((_ connected: Bool) -> Void)
     private var requestedMessage: [String] = []
     private var tickerHandlers: [String: TickerHandler] = [:]
     private var heartbeatHandlers: [String: HeartbeatHandler] = [:]
     private var level2Handlers: [String: Level2Handler] = [:]
-    
+    private var fullHandlers: [String: FullHandler] = [:]
+    private var fullAuthenticateHandlers: [String: FullHandler] = [:]
+
     private let ws = WebSocket(url: URL(string: "wss://ws-feed.gdax.com")!)
     private var openingSocket = false
     public static let client = Feed()
@@ -81,10 +85,10 @@ open class Feed: NSObject {
             do {
                 let k  = try decoder.decode(Response.self, from: response)
                 guard let da2 = message.data(using: .utf8),
-                    let chanType = k.type,
-                    let fType = FeedType(rawValue: chanType) else {
+                    let chanType = k.type else {
                         return
                 }
+                let fType = FeedType(rawValue: chanType) ?? .full
                 switch fType {
                 case .ticker:
                     let tick = try decoder.decode(TickerResponse.self, from: da2)
@@ -121,6 +125,20 @@ open class Feed: NSObject {
                         }
                     }
                     break
+
+                case .full:
+                    let full = try decoder.decode(FullResponse.self, from: da2)
+                    let keys = self.fullHandlers.keys.filter({ (key) -> Bool in
+                        return key.contains(full.product_id!)
+                    })
+                    for key in keys {
+                        if let handler = self.fullHandlers[key] {
+                            handler(full)
+                        }
+                    }
+                    break
+                case .subscriptions:
+                    break
                 }
             } catch {
                 
@@ -145,14 +163,20 @@ open class Feed: NSObject {
         openingSocket = true
     }
     
-    private func getSubscription(name: String, product: [String]) -> String {
-        return "{\"type\": \"subscribe\", \"channels\": [{ \"name\": \"\(name)\", \"product_ids\": [\"\(product.joined(separator: ","))\"]}]}"
+    private func getSubscription(name: String, product: [String], authenticated: Bool? = nil) -> String {
+        return """
+        {
+        \"type\": \"subscribe\",
+        \"channels\": [{ \"name\": \"\(name)\", \"product_ids\": [\"\(product.joined(separator: "\",\""))\"]}]
+        \(authenticated != nil ? ",\"signature\": \"\(Authenticate.client.CB_ACCESS_SIGN)\",\"key\": \"\(Authenticate.client.CB_ACCESS_KEY)\",\"passphrase\": \"\(Authenticate.client.CB_ACCESS_PASSPHRASE)\"" : "")
+        }
+        """
     }
 
-    fileprivate func subscribe(_ prods: [String],_ name: String) {
-        let msg = getSubscription(name: name, product: prods)
+    fileprivate func subscribe(_ prods: [String],_ name: String, authenticated: Bool? = nil) {
+        let msg = getSubscription(name: name, product: prods, authenticated: authenticated)
         !ws.isConnected && !openingSocket ? ws.connect() : ()
-        ws.isConnected ? ws.write(string:msg) : requestedMessage.append(msg)
+        ws.isConnected ? ws.write(string: msg) : requestedMessage.append(msg)
     }
 
     public func subscribeTicker(for products: [gdax_value], responseHandler: @escaping TickerHandler) -> Subscription {
@@ -196,7 +220,21 @@ open class Feed: NSObject {
         subscribe(prods, "level2")
         return sub
     }
-    
+
+    public func subscribeFull(for products: [gdax_value], responseHandler: @escaping FullHandler) -> Subscription {
+        let sub = Subscription()
+        sub.channel = .full
+        let prods:[String] = products.map({
+            let prod = $0.from.getProductId(for: $0.to)
+            sub.products.append(prod)
+            let id = "\(sub.id).\(prod)"
+            fullHandlers[id] = responseHandler
+            return prod
+        })
+        subscribe(prods, "full")
+        return sub
+    }
+
     public func disconectFrom(channel: FeedType, product: String) {
         switch channel {
         case .heartbeat:
@@ -208,6 +246,31 @@ open class Feed: NSObject {
         case .ticker:
             tickerHandlers.removeValue(forKey: product)
             break
+        case .full:
+            fullHandlers.removeValue(forKey: product)
+            break
+        case .subscriptions:
+            break
         }
+    }
+
+    open class authenticate {
+        public func subscribeFull(for products: [gdax_value], responseHandler: @escaping FullHandler) -> Subscription? {
+            guard GDAX.isAuthenticated else {
+                return nil
+            }
+            let sub = Subscription()
+            sub.channel = .full
+            let prods:[String] = products.map({
+                let prod = $0.from.getProductId(for: $0.to)
+                sub.products.append(prod)
+                let id = "\(sub.id).\(prod)"
+                Feed.client.fullHandlers[id] = responseHandler
+                return prod
+            })
+            Feed.client.subscribe(prods, "full", authenticated: true)
+            return sub
+        }
+
     }
 }

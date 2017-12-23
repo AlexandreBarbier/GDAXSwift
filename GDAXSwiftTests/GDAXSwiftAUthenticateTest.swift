@@ -101,7 +101,6 @@ class GDAXSwiftAUthenticateTest: XCTestCase {
         let expect = expectation(description: "")
         let order = Order()
         order.price = "4887.50"
-        order.type = "limit"
         order.post_only = true
         order.side = "buy"
         order.size = "1.0"

@@ -51,6 +51,23 @@ class GDAXSwiftTests: XCTestCase {
         }
     }
 
+    func testFull() {
+        var expect: XCTestExpectation? = expectation(description:"")
+
+        let sub = GDAX.feed.subscribeFull(for: [gdax_value(from:.LTC, to:.BTC)]) { (message) in
+            XCTAssert(message.product_id == "LTC-BTC")
+
+            expect?.fulfill()
+            expect = nil
+        }
+        waitForExpectations(timeout:5.0) { (error) in
+            sub.unsubscribe()
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            }
+        }
+    }
+
     func testProductlevel1() {
         let expect = expectation(description:"")
 

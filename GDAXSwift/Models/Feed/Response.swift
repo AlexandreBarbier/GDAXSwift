@@ -9,7 +9,7 @@
 import UIKit
 
 public enum FeedType: String {
-    case heartbeat, ticker, l2update
+    case heartbeat, ticker, l2update, full, subscriptions
 }
 
 class Response: Codable {

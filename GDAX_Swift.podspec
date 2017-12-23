@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GDAX_Swift"
-  s.version      = "0.1.2"
+  s.version      = "0.1.3"
   s.summary      = "GDAXSwift is light gdax sdk in swift"
 
   # This description is used to generate tags and improve search results.
