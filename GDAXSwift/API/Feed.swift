@@ -8,9 +8,10 @@
 
 import UIKit
 import Starscream
+import CryptoSwift
 
 public enum gdax_products: String {
-    case LTC, BTC, ETH, EUR, USD
+    case LTC, BTC, ETH, EUR, USD, BCH
 
     public func getProductId(for product: gdax_products) -> String {
         return "\(self.rawValue)-\(product.rawValue)"
@@ -64,7 +65,6 @@ open class Feed: NSObject {
     private var heartbeatHandlers: [String: HeartbeatHandler] = [:]
     private var level2Handlers: [String: Level2Handler] = [:]
     private var fullHandlers: [String: FullHandler] = [:]
-    private var fullAuthenticateHandlers: [String: FullHandler] = [:]
 
     private let ws = WebSocket(url: URL(string: "wss://ws-feed.gdax.com")!)
     private var openingSocket = false
@@ -164,11 +164,25 @@ open class Feed: NSObject {
     }
     
     private func getSubscription(name: String, product: [String], authenticated: Bool? = nil) -> String {
+        let timestamp = Int64(Date().timeIntervalSince1970)
+        var sign:String? = nil
+        if authenticated != nil {
+            let method = "GET"
+            let path = "users/self/verify"
+            let what = "\(timestamp)\(method.uppercased())\(path)".data(using: .utf8)
+            let key = Data(base64Encoded:Authenticate.client.CB_ACCESS_SIGN)
+
+            do {
+                sign = try HMAC(key: key!.bytes, variant: .sha256).authenticate(what!.bytes).toBase64()
+            } catch {
+
+            }
+        }
         return """
         {
         \"type\": \"subscribe\",
         \"channels\": [{ \"name\": \"\(name)\", \"product_ids\": [\"\(product.joined(separator: "\",\""))\"]}]
-        \(authenticated != nil ? ",\"signature\": \"\(Authenticate.client.CB_ACCESS_SIGN)\",\"key\": \"\(Authenticate.client.CB_ACCESS_KEY)\",\"passphrase\": \"\(Authenticate.client.CB_ACCESS_PASSPHRASE)\"" : "")
+        \(authenticated != nil ? ",\"signature\": \"\(sign!)\",\"key\": \"\(Authenticate.client.CB_ACCESS_KEY)\",\"passphrase\": \"\(Authenticate.client.CB_ACCESS_PASSPHRASE)\", timestamp:\(timestamp)" : "")
         }
         """
     }
@@ -268,7 +282,7 @@ open class Feed: NSObject {
                 Feed.client.fullHandlers[id] = responseHandler
                 return prod
             })
-            Feed.client.subscribe(prods, "full", authenticated: true)
+            Feed.client.subscribe(prods, "user", authenticated: true)
             return sub
         }
 
