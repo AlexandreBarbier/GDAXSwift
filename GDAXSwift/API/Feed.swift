@@ -73,7 +73,9 @@ open class Feed: NSObject {
     public var isConnected: Bool { return ws.isConnected }
 
     public var onConnectionChange:[ConnectionChangeHandler]?
+    public var user: authenticate = authenticate()
 
+    
     private override init() {
         super.init()
         ws.onText = { message in
