@@ -8,7 +8,7 @@
 
 import UIKit
 
-var BASE_URL: String { return GDAX.debug ? "https://api-public.sandbox.gdax.com" : "https://api.gdax.com"}
+var BASE_URL: String { return GDAX.debug ? "https://api-public.sandbox.pro.coinbase.com" : "https://api.pro.coinbase.com"}
 
 open class Market: NSObject {
     static let client = Market()
