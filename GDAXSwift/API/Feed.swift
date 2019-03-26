@@ -11,8 +11,8 @@ import Starscream
 import CryptoSwift
 
 public enum gdax_products: String {
-    case LTC, BTC, ETH, EUR, USD, BCH
-
+    case LTC, BTC, ETH, BCH, ETC, ZRX,  EUR, USD
+    
     public func getProductId(for product: gdax_products) -> String {
         return "\(self.rawValue)-\(product.rawValue)"
     }
@@ -28,8 +28,20 @@ public struct GDAXProductsId {
     public static let BTC_USD = gdax_products.BTC.getProductId(for: gdax_products.USD)
     
     public static let ETH_EUR = gdax_products.ETH.getProductId(for: gdax_products.EUR)
-    public static let ETH_USD = gdax_products.LTC.getProductId(for: gdax_products.USD)
+    public static let ETH_USD = gdax_products.ETH.getProductId(for: gdax_products.USD)
     public static let ETH_BTC = gdax_products.ETH.getProductId(for: gdax_products.BTC)
+    
+    public static let BCH_EUR = gdax_products.BCH.getProductId(for: gdax_products.EUR)
+    public static let BCH_USD = gdax_products.BCH.getProductId(for: gdax_products.USD)
+    public static let BCH_BTC = gdax_products.BCH.getProductId(for: gdax_products.BTC)
+    
+    public static let ETC_EUR = gdax_products.ETC.getProductId(for: gdax_products.EUR)
+    public static let ETC_USD = gdax_products.ETC.getProductId(for: gdax_products.USD)
+    public static let ETC_BTC = gdax_products.ETC.getProductId(for: gdax_products.BTC)
+    
+    public static let ZRX_EUR = gdax_products.ZRX.getProductId(for: gdax_products.EUR)
+    public static let ZRX_USD = gdax_products.ZRX.getProductId(for: gdax_products.USD)
+    public static let ZRX_BTC = gdax_products.ZRX.getProductId(for: gdax_products.BTC)
 }
 
 public struct gdax_value {
